@@ -70,3 +70,7 @@ The data is in the ROS ".bag" format. With the nomenclature: Configuration_Mater
 |/dvrk/PSM2/twist_body_current           |geometry_msgs/TwistStamped
 |/dvrk/PSM2/wrench_body_current          |geometry_msgs/WrenchStamped
 |/force_sensor                           |geometry_msgs/WrenchStamped
+
+## Extraction Script
+
+For convenience we provide an extraction script. It uses the rosbag package and was written for the Python 2 version of ROS. So it hasn't been tested for Python 3 ROS versions. It also uses some other packages like tqdm and more critically, OpenCV. There might be modifications needed to make it work for specific version of OpenCV.
