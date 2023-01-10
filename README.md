@@ -1,5 +1,7 @@
 # Single PSM Simple Tissue Phantom Dataset
 
+![Sample Image](/img_2894.jpg)
+
 The Single PSM Simple Tissue Phantom Dataset is a multimodal dataset of teleoperate manipulations performed using only the right patient side manipulator (PSM) from a da Vinci Research Kit on a silicone tissue phantom stretched over a sponge base layer. The data are collected in different robot and camera configurations relative to the tissue stage, with different surgical tools (Cadiere and Maryland Bipolar forceps) and with different silicone material (Limbs and Things tissue and DragonSkin).
 
 ## Download Link
