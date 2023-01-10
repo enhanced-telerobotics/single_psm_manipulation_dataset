@@ -6,6 +6,7 @@ The Single PSM Simple Tissue Phantom Dataset is a multimodal dataset of teleoper
 
 ## Download Link
 
+[Link](https://cwru.box.com/s/dllw66bd55gxpv4pyo6mlezhi1qfdowb)
 
 If you use this dataset, please cite our paper where the dataset was first presented.
 
