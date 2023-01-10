@@ -7,6 +7,21 @@ The Single PSM Simple Tissue Phantom Dataset is a multimodal dataset of teleoper
 ## Download Link
 
 
+If you use this dataset, please cite our paper where the dataset was first presented.
+
+Z. Chua, A. M. Jarc, and A. M. Okamura, “Toward Force Estimation in Robot-Assisted Surgery using Deep Learning with Vision and Robot State,” in 2021 IEEE International Conference on Robotics and Automation (ICRA), May 2021, pp. 12335–12341. doi: 10.1109/ICRA48506.2021.9560945.
+
+@inproceedings{chuaForceEstimationRobotAssisted2021,
+  title = {Toward Force Estimation in Robot-Assisted Surgery Using Deep Learning with Vision and Robot State},
+  booktitle = {2021 IEEE International Conference on Robotics and Automation (ICRA)},
+  author = {Chua, Zonghe and Jarc, Anthony M. and Okamura, Allison M.},
+  year = {2021},
+  month = may,
+  pages = {12335--12341},
+  doi = {10.1109/ICRA48506.2021.9560945},
+}
+
+
 ## Dataset Format
 
 ### File Naming Convention
