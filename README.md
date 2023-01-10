@@ -53,3 +53,19 @@ The data is in the ROS ".bag" format. With the nomenclature: Configuration_Mater
 | T2        | Maryland    |
 
 ### ROS Topics
+
+| Topic   | Type |
+|---------|------|
+|/camera/left/image_color/compressed     |sensor_msgs/CompressedImage
+|/camera/right/image_color/compressed    |sensor_msgs/CompressedImage
+|/dvrk/PSM2/jacobian_body                |std_msgs/Float64MultiArray
+|/dvrk/PSM2/jacobian_spatial             |std_msgs/Float64MultiArray
+|/dvrk/PSM2/position_cartesian_current   |geometry_msgs/PoseStamped
+|/dvrk/PSM2/position_cartesian_desired   |geometry_msgs/PoseStamped
+|/dvrk/PSM2/state_jaw_current            |sensor_msgs/JointState
+|/dvrk/PSM2/state_jaw_desired            |sensor_msgs/JointState
+|/dvrk/PSM2/state_joint_current          |sensor_msgs/JointState
+|/dvrk/PSM2/state_joint_desired          |sensor_msgs/JointState
+|/dvrk/PSM2/twist_body_current           |geometry_msgs/TwistStamped
+|/dvrk/PSM2/wrench_body_current          |geometry_msgs/WrenchStamped
+|/force_sensor                           |geometry_msgs/WrenchStamped
