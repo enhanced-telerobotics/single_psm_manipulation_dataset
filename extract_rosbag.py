@@ -60,15 +60,11 @@ for bagname in bag_list:
                   'force_gt': '/force_sensor'
                   }
 
-    out_filedir = 'output_'+bagname.split(os.sep)[-1].split('.')[0]
+    out_filedir = 'output'+os.sep+bagname.split(os.sep)[-1].split('.')[0]
     print('output into directory ' + out_filedir)
-    outfile_full = os.getcwd()+'/'+out_filedir
+    outfile_full = os.getcwd()+os.sep+out_filedir
     print('making ' + outfile_full)
-
-    try:
-        os.mkdir(outfile_full)
-    except:
-        print('directory exists')
+    os.makedirs(outfile_full, exist_ok=True)
 
     bag = rosbag.Bag(bagname)
     first_msg = False
@@ -96,11 +92,11 @@ for bagname in bag_list:
 
     if output_format == 'video':
         try:
-            video_out = cv2.cv.VideoWriter(
-                out_filedir + '/capture.avi', cv2.cv.CV_FOURCC(*'MJPG'), 30, (960, 540))
+            video_out = cv2.VideoWriter(
+                out_filedir + '/capture.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (960, 540))
         except:
             video_out = cv2.VideoWriter(
-                out_filedir + '/capture.avi', cv2.VideoWriter_fourcc(*'MJPG'), 30, (960, 540))
+                out_filedir + '/capture.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (960, 540))
         print('initialized video file output with 30hz data')
     elif output_format == 'labels':
         print('initialized 30Hz data output only')
@@ -124,6 +120,7 @@ for bagname in bag_list:
         f = open(outfile_full + '/labels_30hz.txt', 'w')
     # close the file
     f.close()
+
     # open in append mode
     if output_format == '200hz_labels':
         # write the output file
