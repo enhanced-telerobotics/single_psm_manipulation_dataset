@@ -60,7 +60,8 @@ for bagname in bag_list:
                   'force_gt': '/force_sensor'
                   }
 
-    out_filedir = 'output'+os.sep+bagname.split(os.sep)[-1].split('.')[0]
+    file_name = bagname.split(os.sep)[-1].split('.')[0]
+    out_filedir = 'output'+os.sep+file_name
     print('output into directory ' + out_filedir)
     outfile_full = os.getcwd()+os.sep+out_filedir
     print('making ' + outfile_full)
@@ -92,11 +93,15 @@ for bagname in bag_list:
 
     if output_format == 'video':
         try:
-            video_out = cv2.VideoWriter(
-                out_filedir + '/capture.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (960, 540))
+            video_left_out = cv2.VideoWriter(
+                f'{out_filedir}{os.sep}{file_name}_L.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (960, 540))
+            video_right_out = cv2.VideoWriter(
+                f'{out_filedir}{os.sep}{file_name}_R.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (960, 540))
         except:
-            video_out = cv2.VideoWriter(
-                out_filedir + '/capture.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (960, 540))
+            video_left_out = cv2.VideoWriter(
+                f'{out_filedir}{os.sep}{file_name}_L.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (960, 540))
+            video_right_out = cv2.VideoWriter(
+                f'{out_filedir}{os.sep}{file_name}_R.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (960, 540))
         print('initialized video file output with 30hz data')
     elif output_format == 'labels':
         print('initialized 30Hz data output only')
@@ -177,6 +182,8 @@ for bagname in bag_list:
             if output_format == "stereo":
                 im_file = out_filedir + '/right_img/img_'+str(count)+'.jpg'
                 cv2.imwrite(im_file, img)
+            elif output_format == 'video':
+                video_right_out.write(img)
 
         if topic == topic_dict['left_image']:
             # when we read an image message then we dump the data.
@@ -184,7 +191,7 @@ for bagname in bag_list:
             img = cv2.imdecode(img_data, cv2.IMREAD_COLOR)
 
             if output_format == 'video':
-                video_out.write(img)
+                video_left_out.write(img)
             elif (output_format == 'labels' or output_format == 'maxhz_labels'):
                 pass
             else:
@@ -285,7 +292,8 @@ for bagname in bag_list:
     pbar.close()
     if output_format == 'video':
         print('closing video writer')
-        video_out.release()
+        video_left_out.release()
+        video_right_out.release()
 
     bag.close()
     f.close()
