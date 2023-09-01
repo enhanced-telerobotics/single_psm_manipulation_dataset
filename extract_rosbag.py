@@ -45,21 +45,6 @@ print(bag_list)
 
 for bagname in bag_list:
 
-    # add the topics you would like to read
-    topic_dict = {'left_image': '/camera/left/image_color/compressed',
-                  'right_image': '/camera/right/image_color/compressed',
-                  'pose_current': '/dvrk/PSM2/position_cartesian_current',
-                  'pose_desired': '/dvrk/PSM2/position_cartesian_desired',
-                  'joint_current': '/dvrk/PSM2/state_joint_current',
-                  'jaw_current': '/dvrk/PSM2/state_jaw_current',
-                  'joint_desired': '/dvrk/PSM2/state_joint_desired',
-                  'jaw_desired': '/dvrk/PSM2/state_jaw_desired',
-                  'body_twist': '/dvrk/PSM2/twist_body_current',
-                  'body_wrench': '/dvrk/PSM2/wrench_body_current',
-                  'space_jacobian': '/dvrk/PSM2/jacobian_spatial',
-                  'force_gt': '/force_sensor'
-                  }
-
     file_name = bagname.split(os.sep)[-1].split('.')[0]
     out_filedir = 'output'+os.sep+file_name
     print('output into directory ' + out_filedir)
@@ -68,8 +53,26 @@ for bagname in bag_list:
     os.makedirs(outfile_full, exist_ok=True)
 
     bag = rosbag.Bag(bagname)
+    topics_info = bag.get_type_and_topic_info()[1]
+    topics = list(topics_info.keys())
+    PSM_id = 'PSM1' if any('PSM1' in topic for topic in topics) else 'PSM2'
     first_msg = False
     count = 0
+
+    # add the topics you would like to read
+    topic_dict = {'left_image': '/camera/left/image_color/compressed',
+                  'right_image': '/camera/right/image_color/compressed',
+                  'pose_current': f'/dvrk/{PSM_id}/position_cartesian_current',
+                  'pose_desired': f'/dvrk/{PSM_id}/position_cartesian_desired',
+                  'joint_current': f'/dvrk/{PSM_id}/state_joint_current',
+                  'jaw_current': f'/dvrk/{PSM_id}/state_jaw_current',
+                  'joint_desired': f'/dvrk/{PSM_id}/state_joint_desired',
+                  'jaw_desired': f'/dvrk/{PSM_id}/state_jaw_desired',
+                  'body_twist': f'/dvrk/{PSM_id}/twist_body_current',
+                  'body_wrench': f'/dvrk/{PSM_id}/wrench_body_current',
+                  'space_jacobian': f'/dvrk/{PSM_id}/jacobian_spatial',
+                  'force_gt': '/force_sensor'
+                  }
 
     # create the arrays to hold the read values
     fs_data = np.zeros(3)
